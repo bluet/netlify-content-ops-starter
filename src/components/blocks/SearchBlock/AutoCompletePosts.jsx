@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ALGOLIA_APP_ID, ALGOLIA_SEARCH_API_KEY, buildIndexName } from '../../../utils/indexer/consts';
-import algoliasearch from 'algoliasearch';
+import { algoliasearch } from 'algoliasearch';
 import { getAlgoliaResults } from '@algolia/autocomplete-js';
 import '@algolia/autocomplete-theme-classic';
 import BaseAutoComplete from './BaseAutoComplete';
