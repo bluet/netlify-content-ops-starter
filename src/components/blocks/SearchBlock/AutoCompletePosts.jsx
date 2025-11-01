@@ -5,9 +5,28 @@ import { getAlgoliaResults } from '@algolia/autocomplete-js';
 import '@algolia/autocomplete-theme-classic';
 import BaseAutoComplete from './BaseAutoComplete';
 
-const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_SEARCH_API_KEY);
+// Initialize search client only if credentials are available
+const searchClient = ALGOLIA_APP_ID && ALGOLIA_SEARCH_API_KEY 
+    ? algoliasearch(ALGOLIA_APP_ID, ALGOLIA_SEARCH_API_KEY)
+    : null;
 
 export default function AutoCompletePosts() {
+    // If Algolia credentials are not configured, render a disabled search box
+    if (!searchClient) {
+        return (
+            <div className="aa-Autocomplete" role="combobox">
+                <div className="aa-Input">
+                    <input 
+                        className="aa-InputField" 
+                        placeholder="Search in posts..." 
+                        disabled
+                        title="Search is not configured"
+                    />
+                </div>
+            </div>
+        );
+    }
+
     return (
         <BaseAutoComplete
             openOnFocus={true}
